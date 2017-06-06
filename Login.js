@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, TextInput, TouchableHighlight, Button, ActivityIndicator } from 'react-native';
+import { AuthService } from './AuthService';
 
 export default class Login extends React.Component {
 
@@ -13,6 +14,14 @@ export default class Login extends React.Component {
         }
     }
     render() {
+        var errorCtrl = <View />;
+
+        if (!this.state.success && this.state.badCredentials) {
+            errorCtrl = <Text style={styles.error}>The username and password combination did not work</Text>
+        }
+        if (!this.state.success && this.state.unknownError) {
+            errorCtrl = <Text style={styles.error}>We experiencied an unexpected issue</Text>
+        }
         return (
             <View style={styles.container}>
                 <Image style={styles.logo} source={require('./images/Octocat.png')}></Image>
@@ -24,6 +33,7 @@ export default class Login extends React.Component {
                         Log in
                 </Text>
                 </TouchableHighlight>
+                {errorCtrl}
                 <ActivityIndicator
                     animating={this.state.showProgess}
                     style={styles.loader}
@@ -37,14 +47,16 @@ export default class Login extends React.Component {
     onLoginPressed() {
         console.log('Attemping to log with username ', this.state.username);
         this.setState({ showProgess: true });
-        fetch('https://api.github.com/search/repositories?q=react')
-            .then((response) => {
-                return response.json();
-            })
-            .then((results) => {
-                console.log('results', results)
-                this.setState({ showProgess: false });
-            });
+        var authService = require('./AuthService');
+        // new AuthService().login({
+        authService.login({
+            username: this.state.username,
+            password: this.state.password
+        }, (results) => {
+            this.setState(Object.assign({
+                showProgess: false
+            }, results));
+        });
     }
 }
 
@@ -86,5 +98,9 @@ const styles = StyleSheet.create({
         fontSize: 22,
         color: '#FFF',
         alignSelf: 'center'
+    },
+    error: {
+        color: 'red',
+        padding: 10
     }
 });

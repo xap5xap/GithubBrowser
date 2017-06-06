@@ -16,7 +16,7 @@ import {
 export default class GithubBrowser extends Component {
   render() {
     return (
-      <Login/>
+      <Login />
     );
   }
 }

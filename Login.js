@@ -10,7 +10,7 @@ export default class Login extends React.Component {
         this.state = {
             username: '',
             password: '',
-            showProgess: false
+            showProgess: true
         }
     }
     render() {
@@ -48,15 +48,19 @@ export default class Login extends React.Component {
         console.log('Attemping to log with username ', this.state.username);
         this.setState({ showProgess: true });
         var authService = require('./AuthService');
-        // new AuthService().login({
         authService.login({
             username: this.state.username,
             password: this.state.password
         }, (results) => {
+            console.log('results 1', results);
             this.setState(Object.assign({
                 showProgess: false
             }, results));
+            if (results.success && this.props.onLogin) {
+                this.props.onLogin();
+            }
         });
+
     }
 }
 

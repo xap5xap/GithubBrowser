@@ -5,7 +5,6 @@ class AuthService {
         var b = new Buffer(`${creds.username}:${creds.password}`);
         var encodedAuth = b.toString('base64');
         console.log('encodedAuth', encodedAuth);
-        // fetch('https://api.github.com/search/repositories?q=react')
         fetch('https://api.github.com/user', {
             headers: {
                 'Authorization': 'Basic ' + encodedAuth

@@ -14,10 +14,30 @@ import {
 } from 'react-native';
 
 export default class GithubBrowser extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      isLoggedIn: false
+    };
+
+    this.onLogin = this.onLogin.bind(this);
+  }
+
   render() {
-    return (
-      <Login />
-    );
+    if (this.state.isLoggedIn) {
+      return (<View style={styles.container}>
+        <Text style={styles.welcome}>Logged in</Text>
+
+      </View>);
+    } else {
+      return (<Login onLogin={this.onLogin} />);
+    }
+  }
+
+  onLogin() {
+    console.log('sucessful');
+    this.setState({ isLoggedIn: true });
   }
 }
 

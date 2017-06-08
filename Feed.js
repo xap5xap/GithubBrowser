@@ -19,7 +19,9 @@ export default class Feed extends React.Component {
         super();
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
-            dataSource: ds.cloneWithRows([{ actor: { login: '' } }]),
+            // dataSource: ds.cloneWithRows([{ actor: { login: '' } }]),
+            dataSource: ds,
+            showProgress: true
         };
     }
 
@@ -43,7 +45,8 @@ export default class Feed extends React.Component {
                     });
                     console.log('feedItems', feedItems);
                     this.setState({
-                        dataSource: this.state.dataSource.cloneWithRows(feedItems)
+                        dataSource: this.state.dataSource.cloneWithRows(feedItems),
+                        showProgress: false
                     });
                     console.log('this.state.dataSource', this.state.dataSource);
                 });
@@ -64,8 +67,19 @@ export default class Feed extends React.Component {
     }
 
     render() {
+        if (this.state.showProgress) {
+            return (
+                <View style={{
+                    flex: 1,
+                    justifyContent: 'center'
+                }}>
+                    <ActivityIndicator size="large" animating={true}></ActivityIndicator>
+                </View>
+            );
+        }
         return (
             <View style={styles.container}>
+                <Text>Results</Text>
                 <ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)}></ListView>
             </View>
         );

@@ -35,11 +35,7 @@ export default class AppContainer extends Component {
                 renderTabBar={() => <DefaultTabBar />}
             >
                 <ScrollView tabLabel="Feed" style={styles.tabView}>
-                    <View style={styles.card}>
-                       <Text>Hola</Text>
                        <Feed/>
-
-                    </View>
                 </ScrollView>
                 <ScrollView tabLabel="Search" style={styles.tabView}>
                     <View style={styles.card}>

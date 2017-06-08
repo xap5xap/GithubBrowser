@@ -37,7 +37,7 @@ export default class AppContainer extends Component {
                 <ScrollView tabLabel="Feed" style={styles.tabView}>
                     <View style={styles.card}>
                        <Text>Hola</Text>
-                       <Feed></Feed>
+                       <Feed/>
 
                     </View>
                 </ScrollView>

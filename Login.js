@@ -45,14 +45,12 @@ export default class Login extends React.Component {
     }
 
     onLoginPressed() {
-        console.log('Attemping to log with username ', this.state.username);
         this.setState({ showProgess: true });
         var authService = require('./AuthService');
         authService.login({
             username: this.state.username,
             password: this.state.password
         }, (results) => {
-            console.log('results 1', results);
             this.setState(Object.assign({
                 showProgess: false
             }, results));

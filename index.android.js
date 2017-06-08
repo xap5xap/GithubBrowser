@@ -24,7 +24,6 @@ export default class GithubBrowser extends Component {
   }
   componentDidMount() {
     authService.getAuthInfo((err, authInfo) => {
-      console.log('authInfo', authInfo);
       this.setState({
         checkingAuth: false,
         isLoggedIn: authInfo != null
@@ -50,7 +49,6 @@ export default class GithubBrowser extends Component {
   }
 
   onLogin() {
-    console.log('sucessful');
     this.setState({ isLoggedIn: true });
   }
 }

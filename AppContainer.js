@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import Login from './Login';
 import {
     AppRegistry,
     StyleSheet,
     Text,
+    ScrollView,
     View,
     TabBarIOS,
     ActivityIndicator
@@ -17,28 +20,68 @@ export default class AppContainer extends Component {
         super(props);
 
         this.state = {
-            selectedTab:'feed'
+            selectedTab: 0
         };
 
     }
 
     render() {
-        return (<View style={styles.container}>
-            <Text style={styles.welcome}>Tabs coming soon</Text>
-        </View>);
+        return (
+            <ScrollableTabView
+                style={{ marginTop: 20, }}
+                onChangeTab={(arg) => {
+                    this.setState({ selectedTab: i })
+                }}
+                renderTabBar={() => <DefaultTabBar />}
+            >
+                <ScrollView tabLabel="Feed" style={styles.tabView}>
+                    <View style={styles.card}>
+                        <Text>News</Text>
+                    </View>
+                </ScrollView>
+                <ScrollView tabLabel="Search" style={styles.tabView}>
+                    <View style={styles.card}>
+                        <Text>Friends</Text>
+                    </View>
+                </ScrollView>
+
+            </ScrollableTabView>
+        );
     }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  }
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+    },
+    icon: {
+        width: 300,
+        height: 300,
+        alignSelf: 'center',
+    },
+    tabView: {
+        flex: 1,
+        padding: 10,
+        backgroundColor: 'rgba(0,0,0,0.01)',
+    },
+    card: {
+        borderWidth: 1,
+        backgroundColor: '#fff',
+        borderColor: 'rgba(0,0,0,0.1)',
+        margin: 5,
+        height: 150,
+        padding: 15,
+        shadowColor: '#ccc',
+        shadowOffset: { width: 2, height: 2, },
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
+    },
 });

@@ -10,6 +10,7 @@ import {
     TabBarIOS,
     ListView,
     ActivityIndicator,
+    TouchableHighlight,
     Image
 } from 'react-native';
 
@@ -54,22 +55,29 @@ export default class Feed extends React.Component {
         });
     }
 
+    pressRow(rowData) {
+        console.log(rowData);
+    }
+
     renderRow(rowdata) {
         return (
-            <View style={styles.row}>
-                <Image source={{ uri: rowdata.actor.avatar_url }} style={{
-                    height: 36,
-                    width: 36,
-                    borderRadius: 18
-                }}></Image>
-                <View style={{
-                    paddingLeft: 20
-                }}>
-                    <Text style={{ backgroundColor: '#FFF' }}>{rowdata.created_at}</Text>
-                    <Text style={{ backgroundColor: '#FFF' }}>{rowdata.actor.login}</Text>
-                    <Text style={{ backgroundColor: '#FFF' }}>{rowdata.repo.name}</Text>
+            <TouchableHighlight underlayColor='#ddd'
+                onPress={() => this.pressRow(rowdata)}>
+                <View style={styles.row}>
+                    <Image source={{ uri: rowdata.actor.avatar_url }} style={{
+                        height: 36,
+                        width: 36,
+                        borderRadius: 18
+                    }}></Image>
+                    <View style={{
+                        paddingLeft: 20
+                    }}>
+                        <Text style={{ backgroundColor: '#FFF' }}>{rowdata.created_at}</Text>
+                        <Text style={{ backgroundColor: '#FFF' }}>{rowdata.actor.login}</Text>
+                        <Text style={{ backgroundColor: '#FFF' }}>{rowdata.repo.name}</Text>
+                    </View>
                 </View>
-            </View>
+            </TouchableHighlight>
         );
     }
 

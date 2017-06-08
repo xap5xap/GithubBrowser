@@ -9,7 +9,8 @@ import {
     View,
     TabBarIOS,
     ListView,
-    ActivityIndicator
+    ActivityIndicator,
+    Image
 } from 'react-native';
 
 
@@ -54,16 +55,22 @@ export default class Feed extends React.Component {
     }
 
     renderRow(rowdata) {
-        if (rowdata) {
-            return (
-
-                <Text style={{ color: '#333' }}>
-                    {rowdata.actor.login}
-                </Text>
-            );
-        }
-
-
+        return (
+            <View style={styles.row}>
+                <Image source={{ uri: rowdata.actor.avatar_url }} style={{
+                    height: 36,
+                    width: 36,
+                    borderRadius: 18
+                }}></Image>
+                <View style={{
+                    paddingLeft: 20
+                }}>
+                    <Text style={{ backgroundColor: '#FFF' }}>{rowdata.created_at}</Text>
+                    <Text style={{ backgroundColor: '#FFF' }}>{rowdata.actor.login}</Text>
+                    <Text style={{ backgroundColor: '#FFF' }}>{rowdata.repo.name}</Text>
+                </View>
+            </View>
+        );
     }
 
     render() {
@@ -90,8 +97,15 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
         alignSelf: 'center'
     },
+    row: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 20,
+        alignItems: 'center',
+        borderColor: '#D7D7D7',
+        borderBottomWidth: 1
+    }
 
 });

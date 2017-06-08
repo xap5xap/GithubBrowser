@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Feed from './Feed';
 
-import Login from './Login';
 import {
     AppRegistry,
     StyleSheet,
@@ -36,7 +36,9 @@ export default class AppContainer extends Component {
             >
                 <ScrollView tabLabel="Feed" style={styles.tabView}>
                     <View style={styles.card}>
-                        <Text>News</Text>
+                       <Text>Hola</Text>
+                       <Feed></Feed>
+
                     </View>
                 </ScrollView>
                 <ScrollView tabLabel="Search" style={styles.tabView}>
